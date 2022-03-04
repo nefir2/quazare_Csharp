@@ -1,6 +1,6 @@
 ﻿using System;
 namespace quazare {
-	class квазар {
+	class Квазар {
 		static void Main(string[] args) {
 			//переменные
 			double stavka, vse, record;
@@ -11,14 +11,14 @@ namespace quazare {
 				vse = 200;
 				record = 0;
 				do {
-					stavka = ставка(vse);
-					vse = пересчёт(vse, stavka);
-					Console.WriteLine($"автомат: {avtomat = автомат(0, 0)}");
+					stavka = Ставка(vse);
+					vse = Пересчёт(vse, stavka);
+					Console.WriteLine($"автомат: {avtomat = Автомат(0, 0)}");
 					while (avtomat <= 20) {
 						if (avtomat > 14) {
 							if (avtomat == 20) {
 								Console.WriteLine("ВЫ ПОБЕДИЛИ!");
-								stavka = win(avtomat, stavka);
+								stavka = Win(avtomat, stavka);
 								break;
 							}
 							else {
@@ -28,9 +28,9 @@ namespace quazare {
 									Console.WriteLine("введите 1, 2 или 3!!!");
 									resh = Convert.ToInt32(Console.ReadLine());
 								}
-								if (resh == 1 || resh == 2) avtomat = решение(avtomat, resh);
+								if (resh == 1 || resh == 2) avtomat = Решение(avtomat, resh);
 								else {
-									stavka = win(avtomat, stavka);
+									stavka = Win(avtomat, stavka);
 									break;
 								}
 							}
@@ -42,13 +42,13 @@ namespace quazare {
 								Console.WriteLine("введите 1 или 2!!!");
 								resh = Convert.ToInt32(Console.ReadLine());
 							}
-							avtomat = решение(avtomat, resh);
+							avtomat = Решение(avtomat, resh);
 						}
                     }
 					if (avtomat > 20) { 
 						Console.WriteLine("вы проиграли"); 
-						stavka = win(avtomat, stavka); 
-						br(); 
+						stavka = Win(avtomat, stavka); 
+						Br(); 
 					}
 					vse += stavka;
 					//вывод выигрыша
@@ -58,31 +58,31 @@ namespace quazare {
 						record = vse;
 						Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
 					}
-					br();
+					Br();
 					//решение о продолжение игры
 					if (vse >= 20) {
 						Console.WriteLine("продолжить?\n1.да\n2.нет");
 						ans = Convert.ToInt32(Console.ReadLine());
-						br();
+						Br();
 					} else if (vse < 20){
 						Console.WriteLine("у вас не осталось денег,\nвы проиграли.");
 						ans = 2;
-						br();
+						Br();
 					}
 				} while (ans == 1);
 				//решение о начале игры заново
 				if (vse == 0) {
 					Console.WriteLine("заново?\n1.да\n2.нет\n");
 					x = Convert.ToInt32(Console.ReadLine());
-					br();
+					Br();
 				} 
 				if (x != 1) {
 					Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
-					br(); 
+					Br(); 
 				}
 			} while (x == 1);
 		}
-		static double ставка(double vse) {
+		static double Ставка(double vse) {
 			//переменные
 			int doing; //выбор пользователя
 			double stavka = 0; //объявление ставки
@@ -133,13 +133,13 @@ namespace quazare {
 			}
 			return stavka;
 		}
-		static double пересчёт(double vse, double stavka) {
+		static double Пересчёт(double vse, double stavka) {
 			vse -= stavka;
 			Console.WriteLine($"\nваши деньги: {Math.Floor(vse)}");
-			br();
+			Br();
 			return vse;
 		}
-		static int автомат(int avtomat, int x) {
+		static int Автомат(int avtomat, int x) {
 			//случайное число из автомата
 			int bottom = 0, top = 0;
 			Random rand = new Random();
@@ -161,22 +161,22 @@ namespace quazare {
 			avtomat += rand.Next(bottom, top);
 			return avtomat;
 		}
-		static int решение(int avtomat, int resh) {
+		static int Решение(int avtomat, int resh) {
 			//выбор от решения
 			switch (resh) {
 				case 1:
-					avtomat = автомат(avtomat, 1);
+					avtomat = Автомат(avtomat, 1);
 					Console.WriteLine($"автомат: {avtomat}");
 					break;
 				case 2:
-					avtomat = автомат(avtomat, 2);
+					avtomat = Автомат(avtomat, 2);
 					Console.WriteLine($"автомат: {avtomat}");
 					break;
             }
 			return avtomat;
 		}
 		//функция для определения выигрыша
-		static double win(int a, double dengi) {
+		static double Win(int a, double dengi) {
 			switch (a) {
 				case 15:
                     dengi *= 0.25;
@@ -203,7 +203,7 @@ namespace quazare {
 			return dengi;
 		}
 		//отступ на несколько строк
-		static void br() { 
+		static void Br() { 
 			Console.Write("\n\n\n");
 		}
 	}
