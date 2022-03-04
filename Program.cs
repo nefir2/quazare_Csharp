@@ -179,22 +179,22 @@ namespace quazare {
 		static double win(int a, double dengi) {
 			switch (a) {
 				case 15:
-					dengi = dengi * 0.25;
+                    dengi *= 0.25;
 					break;
 				case 16:
-					dengi = dengi * 0.5;
+					dengi *= 0.5;
 					break;
 				case 17:
                     dengi = dengi;
 					break;
 				case 18:
-					dengi = dengi * 1.25;
+					dengi *= 1.25;
 					break;
 				case 19:
-					dengi = dengi * 1.5;
+					dengi *= 1.5;
 					break;
 				case 20:
-					dengi = dengi * 2;
+					dengi *= 2;
 					break;
 				default:
 					dengi = 0;
