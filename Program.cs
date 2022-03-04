@@ -184,7 +184,7 @@ namespace quazare {
 				case 16:
 					dengi = dengi * 0.5;
 					break;
-					//17 - возвращение той же ставки
+				//17 - возвращение той же ставки
 				case 18:
 					dengi = dengi * 1.25;
 					break;
