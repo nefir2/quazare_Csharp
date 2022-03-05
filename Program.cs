@@ -3,228 +3,220 @@ namespace quazare {
 	class Квазар {
 		static void Main() {
 			//переменные
-			double stavka, vse, record;
-			int x, ans = 1, avtomat, resh;
-			do {
-				//стоковые значения для переменных
-				x = 0;
+			double stavka, vse, record; //для денег
+			int заново, продолжить, avtomat, решение; //для действий
+			do { //заново (на случай полного проигрыша)
+				//стоковые значения для переменных при начале игры заново
+				заново = 0;
 				vse = 200;
 				record = 0;
-				do {
-					stavka = Ставка(vse);
-					vse = Пересчёт(vse, stavka);
-					Console.WriteLine($"автомат: {avtomat = Автомат(0, 0)}");
-					while (avtomat <= 20) {
-						if (avtomat > 14) {
-							if (avtomat == 20) {
+				do { //продолжить (на случай, если остались деньги)
+					stavka = Ставка(vse); //функция действий со ставкой
+					vse = Пересчёт(vse, stavka); //пересчёт всех денег на основе ставки
+					Console.WriteLine($"автомат: {avtomat = Автомат(0, 0)}"); //первый выброс автомата
+					while (avtomat <= 20) { //если выйдет за 20 то автоматический проигрыш ставки
+						if (avtomat > 14) { //если выпало больше 14 то появляется третий вариант выбора
+							if (avtomat == 20) { //автоматический выход на случай победы
 								Console.WriteLine("ВЫ ПОБЕДИЛИ!");
-								stavka = Win(avtomat, stavka);
-								break;
+								stavka = Win(avtomat, stavka); //пересчёт ставки
+								break; //выход из цикла при победе
 							}
 							else {
 								Console.WriteLine("введите 1, 2 или 3\n1: добавить 1-8;\n2: добавить 4-7;\n3: забрать.");
-								resh = Convert.ToInt32(Ввод());
-								while (resh > 3 || resh < 1) {
+								решение = Convert.ToInt32(Ввод()); //ввод действия
+								while (решение > 3 || решение < 1) { //система против дурака
 									Console.WriteLine("введите 1, 2 или 3!!!");
-									resh = Convert.ToInt32(Ввод());
+									решение = Convert.ToInt32(Ввод());
 								}
-								if (resh == 1 || resh == 2) avtomat = Решение(avtomat, resh);
-								else {
-									stavka = Win(avtomat, stavka);
-									break;
+								if (решение == 1 || решение == 2) avtomat = Решение(avtomat, решение); //выброс автомата с учётом выбора игрока
+								else { //третий выбор
+									stavka = Win(avtomat, stavka); //пересчёт ставки
+									break; //выход из цикла
 								}
 							}
 						}
-						else {
+						else { //если выпадает 14 или меньше
 							Console.WriteLine("введите 1 или 2\n1: добавить 1-8;\n2: добавить 4-7.");
-							resh = Convert.ToInt32(Ввод());
-							while (resh > 2 || resh < 1) {
+							решение = Convert.ToInt32(Ввод());
+							while (решение > 2 || решение < 1) { //система против дурака
 								Console.WriteLine("введите 1 или 2!!!");
-								resh = Convert.ToInt32(Ввод());
+								решение = Convert.ToInt32(Ввод());
 							}
-							avtomat = Решение(avtomat, resh);
+							avtomat = Решение(avtomat, решение); //выброс автомата с учётом выбора игрока
 						}
-					}
-					if (avtomat > 20) {
+					} //конец цикла игры
+					if (avtomat > 20) { //проверка на проигрыш
 						Console.WriteLine("вы проиграли");
-						stavka = Win(avtomat, stavka);
-						Br();
+						stavka = Win(avtomat, stavka); //пересчёт денег при проигрыше
+						Br(); //перенос строк (визуал)
 					}
-					vse += stavka;
+					vse += stavka; //возврат денег на весь счёт
 					//вывод выигрыша
-					Console.WriteLine($"ваш выигрыш: {Math.Floor(stavka)}");
-					Console.WriteLine($"ваши деньги: {Math.Floor(vse)}");
-					if (vse > record) {
+					Console.WriteLine($"ваш выигрыш: {Math.Floor(stavka)}"); //вывод выигрыша, без остатка (визуал)
+					Console.WriteLine($"ваши деньги: {Math.Floor(vse)}"); //вывод всех денег, без остатка (визуал)
+					if (vse > record) { //если побито рекордное количество денег, появляется сообщение
 						record = vse;
 						Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
 					}
-					Br();
-					//решение о продолжение игры
-					if (vse >= 20) {
+					Br(); //перенос строк (визуал)
+					if (vse >= 20) { //решение о продолжении игры, если всех денег хватает
 						Console.WriteLine("продолжить?\n1.да\n2.нет");
-						ans = Convert.ToInt32(Ввод());
+						продолжить = Convert.ToInt32(Ввод());
 						Br();
 					}
-					else if (vse < 20) {
+					else { //если все деньги меньше 20
 						Console.WriteLine("у вас не осталось денег,\nвы проиграли.");
-						ans = 2;
+						продолжить = 2; //принудительное окончание игры, из-за проигрыша денег
 						Br();
 					}
-				} while (ans == 1);
-				//решение о начале игры заново
-				if (vse == 0) {
+				} while (продолжить == 1);
+				if (vse < 20) { //решение о начале игры заново. обход случая когда игрок захотел выйти из игры сохранив деньги
 					Console.WriteLine("заново?\n1.да\n2.нет\n");
-					x = Convert.ToInt32(Ввод());
+					заново = Convert.ToInt32(Ввод());
 					Br();
 				}
-				if (x != 1) {
+				if (заново != 1) { //вывод рекорда если игрок захотел выйти
 					Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
 					Br();
 				}
-			} while (x == 1);
-		}
-		static double Ставка(double vse) {
+			} while (заново == 1);
+		} //конец игры
+		static double Ставка(double все_деньги) { //вывод выбора ставки
 			//переменные
-			int doing; //выбор пользователя
-			double stavka = 0; //объявление ставки
+			int действие; //выбор пользователя
+			double ставка = 0; //объявление ставки
 			//вывод меню
-			Console.WriteLine($"у вас всего денег: {Math.Floor(vse)}");
+			Console.WriteLine($"у вас всего денег: {Math.Floor(все_деньги)}");
 			Console.WriteLine("введите номер действия со ставкой:\n");
 			Console.WriteLine("1.поставить все деньги(если больше 200 то ставится 200);");
 			Console.WriteLine("2.поставить половину всех ваших денег(если больше 200 то поставится 100);");
 			Console.WriteLine("3.поставить минимум(20);");
 			Console.WriteLine("4.ввести свою ставку.");
 			//получение выбора действия
-			doing = Convert.ToInt32(Ввод());
-			//система против дурака
-			while (doing > 4 || doing < 1) {
+			действие = Convert.ToInt32(Ввод());
+			while (действие > 4 || действие < 1) { //система против дурака
 				Console.WriteLine("можно ввести от 1 до 4!!");
-				doing = Convert.ToInt32(Ввод());
+				действие = Convert.ToInt32(Ввод());
 			}
-			//распределение по выбору
-			switch (doing) {
+			switch (действие) { //распределение по выбору
 				case 1: //все деньги
-					if (vse > 200) stavka = 200; 
-					else stavka = vse;
+					if (все_деньги > 200) ставка = 200; 
+					else ставка = все_деньги;
 					break;
 				case 2: //половина всех денег
-					if (vse > 200) stavka = 100;
-					else if (vse < 40) { 
-						Console.WriteLine("меньше 20 ставить нельзя. ставка = 20"); 
-						stavka = 20; 
+					if (все_деньги > 200) ставка = 100;
+					else if (все_деньги < 40) { 
+						Console.WriteLine("меньше 20 ставить нельзя. ставка = 20");
+						ставка = 20; 
 					}
-					else stavka = vse / 2;
+					else ставка = все_деньги / 2;
 					break;
 				case 3: //минимальное количество денег
-					stavka = 20;
+					ставка = 20;
 					break;
 				case 4: //ввод своей ставки
 					Console.Write("ставка (20-200): ");
-					stavka = Convert.ToDouble(Ввод());
-					//система от дурака
-					while (stavka < 20 || stavka > 200 || stavka > vse) {
-						if (stavka > 200 || stavka < 20) Console.WriteLine("введите от 20 до 200!!");
-						if (stavka > vse && stavka <= 200 && stavka >= 20) { 
-							Console.WriteLine($"ставка не может быть больше чем количество ваших денег.\nу вас денег: {vse}"); 
+					ставка = Convert.ToDouble(Ввод());
+					while (ставка < 20 || ставка > 200 || ставка > все_деньги) { //система против дурака
+						if (ставка > 200 || ставка < 20) Console.WriteLine("введите от 20 до 200!!"); //если выход за границы возможного ввода
+						if (ставка > все_деньги && ставка <= 200 && ставка >= 20) { //если в границах, но больше всех денег, чем есть не счету
+							Console.WriteLine($"ставка не может быть больше чем количество ваших денег.\nу вас денег: {все_деньги}"); 
 						}
 						Console.WriteLine("ставка (20-200): ");
-						stavka = Convert.ToDouble(Ввод());
+						ставка = Convert.ToDouble(Ввод());
 					}
 					break;
 			}
-			return stavka;
+			return ставка;
 		}
-		static double Пересчёт(double vse, double stavka) {
-			vse -= stavka;
-			Console.WriteLine($"\nваши деньги: {Math.Floor(vse)}");
+		static double Пересчёт(double все_деньги, double ставка) { //простая функция по пересчёту и выводу сообщения о количестве денег
+			все_деньги -= ставка;
+			Console.WriteLine($"\nваши деньги: {Math.Floor(все_деньги)}");
 			Br();
-			return vse;
+			return все_деньги;
 		}
-		static int Автомат(int avtomat, int x) {
-			//случайное число из автомата
+		static int Автомат(int значение_автомата, int номер_действия) { //случайное число из автомата
 			int bottom = 0, top = 0;
 			Random rand = new Random();
-			//гибкость под задачи программы
-			switch (x) {
-				case 0:
+			switch (номер_действия) { //выбор границ выброса значений из автомата
+				case 0: //первый выброс автомата
 					bottom = 1;
 					top = 12;
 					break;
-				case 1:
+				case 1: //первое решение игрока
 					bottom = 1;
 					top = 8;
 					break;
-				case 2:
+				case 2: //второе решение игрока
 					bottom = 4;
 					top = 7;
 					break;
 			}
-			avtomat += rand.Next(bottom, top);
-			return avtomat;
+			значение_автомата += rand.Next(bottom, top); //единственное сложение значений автомата, иначе всё сломается
+			return значение_автомата;
 		}
-		static int Решение(int avtomat, int resh) {
-			//выбор от решения
-			switch (resh) {
+		static int Решение(int значение_автомата, int номер_действия) { //выбор действия игроком 
+			switch (номер_действия) {
 				case 1:
-					avtomat = Автомат(avtomat, 1);
-					Console.WriteLine($"автомат: {avtomat}");
+					значение_автомата = Автомат(значение_автомата, 1);
+					Console.WriteLine($"автомат: {значение_автомата}");
 					break;
 				case 2:
-					avtomat = Автомат(avtomat, 2);
-					Console.WriteLine($"автомат: {avtomat}");
+					значение_автомата = Автомат(значение_автомата, 2);
+					Console.WriteLine($"автомат: {значение_автомата}");
 					break;
 			}
-			return avtomat;
+			return значение_автомата;
 		}
-		static string Ввод() { //на случай пустого, или не численного ввода
-			string n;
-			bool trueno;
+		static string Ввод() { //на случай пустого или не численного ввода 
+			string ввод;
+			bool цикл;
 			do {
-				trueno = false;
-				n = Console.ReadLine();
-				if (n == "") {
+				цикл = false; // не цикл
+				ввод = Console.ReadLine();
+				if (ввод == "") {
 					Console.WriteLine("поаккуратнее с пустым вводом");
-					trueno = true;
+					цикл = true; //цикл
 				}
 				else { 
-					for (int i = 0; i < n.Length; i++) { 
-						if (Char.IsNumber(n, i) == false) {
-							Console.WriteLine("числа для лохов?");
-							trueno = true;
-							break;
+					for (int i = 0; i < ввод.Length; i++) { //цикл для проверки каждого введённого символа на цифры
+						if (Char.IsNumber(ввод, i) == false) { //если очередной символ оказывается не цифрой
+							Console.WriteLine("числа вводи, умник");
+							цикл = true;
+							break; //достаточно одной буквы чтобы сломать ввод, поэтому мы даже при одной букве сразу выходим из цикла фор
 						}
 					}
 				}
 
-			} while (trueno);
-			return n;
+			} while (цикл); //пока действие возвращает цикл, повторяем действие
+			return ввод;
 		}
 		//функция для определения выигрыша
-		static double Win(int a, double dengi) {
-			switch (a) {
+		static double Win(int значение_автомата, double деньги) { //функция пересчёта денег при окончании игры
+			switch (значение_автомата) {
 				case 15:
-					dengi *= 0.25;
+					деньги *= 0.25;
 					break;
 				case 16:
-					dengi *= 0.5;
+					деньги *= 0.5;
 					break;
 				case 17:
-					dengi *= 1;
+					деньги *= 1;
 					break;
 				case 18:
-					dengi *= 1.25;
+					деньги *= 1.25;
 					break;
 				case 19:
-					dengi *= 1.5;
+					деньги *= 1.5;
 					break;
 				case 20:
-					dengi *= 2;
+					деньги *= 2;
 					break;
 				default:
-					dengi = 0;
+					деньги = 0;
 					break;
 			}
-			return dengi;
+			return деньги;
 		}
 		//отступ на несколько строк
 		static void Br() { 
