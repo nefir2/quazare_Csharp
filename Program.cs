@@ -1,7 +1,7 @@
 ﻿using System;
 namespace quazare {
 	class Квазар {
-		static void Main(string[] args) {
+		static void Main() {
 			//переменные
 			double stavka, vse, record;
 			int x, ans = 1, avtomat, resh;
@@ -21,8 +21,7 @@ namespace quazare {
 								stavka = Win(avtomat, stavka);
 								break;
 							}
-							else
-							{
+							else {
 								Console.WriteLine("введите 1, 2 или 3\n1: добавить 1-8;\n2: добавить 4-7;\n3: забрать.");
 								resh = Convert.ToInt32(Ввод());
 								while (resh > 3 || resh < 1) {
@@ -177,24 +176,27 @@ namespace quazare {
 			}
 			return avtomat;
 		}
-		static string Ввод() {
-			string? n;
-			bool trueno = false;
-			n = Console.ReadLine();
-			while (trueno) {
+		static string Ввод() { //на случай пустого, или не численного ввода
+			string n;
+			bool trueno;
+			do {
 				trueno = false;
-				for (int i = 0; i < n.Length; i++) {
-					if (Char.IsNumber(n, i) == false) {
-						Console.WriteLine("ты че какие буквы при ввводе чисел..");
-						trueno = true;
-						break;
-					}
-				} 
-			}
-			while (n == "") {
-				Console.WriteLine("поаккуратнее с пустым вводом");
 				n = Console.ReadLine();
-			} 
+				if (n == "") {
+					Console.WriteLine("поаккуратнее с пустым вводом");
+					trueno = true;
+				}
+				else { 
+					for (int i = 0; i < n.Length; i++) { 
+						if (Char.IsNumber(n, i) == false) {
+							Console.WriteLine("числа для лохов?");
+							trueno = true;
+							break;
+						}
+					}
+				}
+
+			} while (trueno);
 			return n;
 		}
 		//функция для определения выигрыша
@@ -207,7 +209,7 @@ namespace quazare {
 					dengi *= 0.5;
 					break;
 				case 17:
-					dengi = dengi;
+					dengi *= 1;
 					break;
 				case 18:
 					dengi *= 1.25;

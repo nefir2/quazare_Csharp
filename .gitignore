@@ -1,0 +1,8 @@
+
+*.json
+*.dll
+*.cache
+*.pdb
+*.props
+.vs/quazare/v16/.suo
+*.exe
