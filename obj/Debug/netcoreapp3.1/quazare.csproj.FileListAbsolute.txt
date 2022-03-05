@@ -26,3 +26,16 @@ C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.cspro
 C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.dll
 C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.pdb
 C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.genruntimeconfig.cache
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.csproj.AssemblyReference.cache
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.AssemblyInfoInputs.cache
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.AssemblyInfo.cs
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.csproj.CoreCompileInputs.cache
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.dll
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.pdb
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.exe
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.deps.json
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.runtimeconfig.json
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.runtimeconfig.dev.json
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.dll
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\bin\Debug\netcoreapp3.1\quazare.pdb
+\\26k-10-dc10\studocredir\АхтамовВ\Мои документы\GitHub\quazare_Csharp\obj\Debug\netcoreapp3.1\quazare.genruntimeconfig.cache

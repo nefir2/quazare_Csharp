@@ -2,10 +2,6 @@
 namespace quazare {
 	class Квазар {
 		static void Main(string[] args) {
-			//ожидание ввода, если случайно прожат лишний Enter
-			catch(System.ArgumentNullException){
-				int n = Convert.ToInt32(Console.ReadLine());
-			}
 			//переменные
 			double stavka, vse, record;
 			int x, ans = 1, avtomat, resh;
@@ -25,12 +21,13 @@ namespace quazare {
 								stavka = Win(avtomat, stavka);
 								break;
 							}
-							else {
+							else
+							{
 								Console.WriteLine("введите 1, 2 или 3\n1: добавить 1-8;\n2: добавить 4-7;\n3: забрать.");
-								resh = Convert.ToInt32(Console.ReadLine());
+								resh = Convert.ToInt32(Ввод());
 								while (resh > 3 || resh < 1) {
 									Console.WriteLine("введите 1, 2 или 3!!!");
-									resh = Convert.ToInt32(Console.ReadLine());
+									resh = Convert.ToInt32(Ввод());
 								}
 								if (resh == 1 || resh == 2) avtomat = Решение(avtomat, resh);
 								else {
@@ -38,21 +35,21 @@ namespace quazare {
 									break;
 								}
 							}
-                        }
+						}
 						else {
 							Console.WriteLine("введите 1 или 2\n1: добавить 1-8;\n2: добавить 4-7.");
-							resh = Convert.ToInt32(Console.ReadLine());
+							resh = Convert.ToInt32(Ввод());
 							while (resh > 2 || resh < 1) {
 								Console.WriteLine("введите 1 или 2!!!");
-								resh = Convert.ToInt32(Console.ReadLine());
+								resh = Convert.ToInt32(Ввод());
 							}
 							avtomat = Решение(avtomat, resh);
 						}
-                    }
-					if (avtomat > 20) { 
-						Console.WriteLine("вы проиграли"); 
-						stavka = Win(avtomat, stavka); 
-						Br(); 
+					}
+					if (avtomat > 20) {
+						Console.WriteLine("вы проиграли");
+						stavka = Win(avtomat, stavka);
+						Br();
 					}
 					vse += stavka;
 					//вывод выигрыша
@@ -66,9 +63,10 @@ namespace quazare {
 					//решение о продолжение игры
 					if (vse >= 20) {
 						Console.WriteLine("продолжить?\n1.да\n2.нет");
-						ans = Convert.ToInt32(Console.ReadLine());
+						ans = Convert.ToInt32(Ввод());
 						Br();
-					} else if (vse < 20){
+					}
+					else if (vse < 20) {
 						Console.WriteLine("у вас не осталось денег,\nвы проиграли.");
 						ans = 2;
 						Br();
@@ -77,12 +75,12 @@ namespace quazare {
 				//решение о начале игры заново
 				if (vse == 0) {
 					Console.WriteLine("заново?\n1.да\n2.нет\n");
-					x = Convert.ToInt32(Console.ReadLine());
+					x = Convert.ToInt32(Ввод());
 					Br();
-				} 
+				}
 				if (x != 1) {
 					Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
-					Br(); 
+					Br();
 				}
 			} while (x == 1);
 		}
@@ -98,11 +96,11 @@ namespace quazare {
 			Console.WriteLine("3.поставить минимум(20);");
 			Console.WriteLine("4.ввести свою ставку.");
 			//получение выбора действия
-			doing = Convert.ToInt32(Console.ReadLine());
+			doing = Convert.ToInt32(Ввод());
 			//система против дурака
 			while (doing > 4 || doing < 1) {
 				Console.WriteLine("можно ввести от 1 до 4!!");
-				doing = Convert.ToInt32(Console.ReadLine());
+				doing = Convert.ToInt32(Ввод());
 			}
 			//распределение по выбору
 			switch (doing) {
@@ -123,7 +121,7 @@ namespace quazare {
 					break;
 				case 4: //ввод своей ставки
 					Console.Write("ставка (20-200): ");
-					stavka = Convert.ToDouble(Console.ReadLine());
+					stavka = Convert.ToDouble(Ввод());
 					//система от дурака
 					while (stavka < 20 || stavka > 200 || stavka > vse) {
 						if (stavka > 200 || stavka < 20) Console.WriteLine("введите от 20 до 200!!");
@@ -131,7 +129,7 @@ namespace quazare {
 							Console.WriteLine($"ставка не может быть больше чем количество ваших денег.\nу вас денег: {vse}"); 
 						}
 						Console.WriteLine("ставка (20-200): ");
-						stavka = Convert.ToDouble(Console.ReadLine());
+						stavka = Convert.ToDouble(Ввод());
 					}
 					break;
 			}
@@ -148,7 +146,7 @@ namespace quazare {
 			int bottom = 0, top = 0;
 			Random rand = new Random();
 			//гибкость под задачи программы
-            switch (x) {
+			switch (x) {
 				case 0:
 					bottom = 1;
 					top = 12;
@@ -161,7 +159,7 @@ namespace quazare {
 					bottom = 4;
 					top = 7;
 					break;
-            }
+			}
 			avtomat += rand.Next(bottom, top);
 			return avtomat;
 		}
@@ -176,20 +174,40 @@ namespace quazare {
 					avtomat = Автомат(avtomat, 2);
 					Console.WriteLine($"автомат: {avtomat}");
 					break;
-            }
+			}
 			return avtomat;
+		}
+		static string Ввод() {
+			string? n;
+			bool trueno = false;
+			n = Console.ReadLine();
+			while (trueno) {
+				trueno = false;
+				for (int i = 0; i < n.Length; i++) {
+					if (Char.IsNumber(n, i) == false) {
+						Console.WriteLine("ты че какие буквы при ввводе чисел..");
+						trueno = true;
+						break;
+					}
+				} 
+			}
+			while (n == "") {
+				Console.WriteLine("поаккуратнее с пустым вводом");
+				n = Console.ReadLine();
+			} 
+			return n;
 		}
 		//функция для определения выигрыша
 		static double Win(int a, double dengi) {
 			switch (a) {
 				case 15:
-                    dengi *= 0.25;
+					dengi *= 0.25;
 					break;
 				case 16:
 					dengi *= 0.5;
 					break;
 				case 17:
-                    dengi = dengi;
+					dengi = dengi;
 					break;
 				case 18:
 					dengi *= 1.25;
