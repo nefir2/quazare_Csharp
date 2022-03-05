@@ -2,6 +2,10 @@
 namespace quazare {
 	class Квазар {
 		static void Main(string[] args) {
+			//ожидание ввода, если случайно прожат лишний Enter
+			catch(System.ArgumentNullException){
+				int n = Convert.ToInt32(Console.ReadLine());
+			}
 			//переменные
 			double stavka, vse, record;
 			int x, ans = 1, avtomat, resh;
