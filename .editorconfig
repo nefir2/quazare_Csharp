@@ -24,7 +24,9 @@ csharp_space_between_method_call_empty_parameter_list_parentheses=false
 csharp_space_between_empty_square_brackets=true
 csharp_space_after_dot=false
 csharp_space_before_colon_in_inheritance_clause=false
+csharp_indent_labels=flush_left
 
 [*.{cs,vb}]
 tab_width=4
 indent_size=4
+indent_style=space

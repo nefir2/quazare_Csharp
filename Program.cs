@@ -303,7 +303,7 @@ namespace quazare {
 					деньги *= 2;
 					break;
 				default:
-					деньги = 0;
+					деньги *= 0;
 					break;
 			}
 			return деньги;
