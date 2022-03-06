@@ -175,7 +175,7 @@ namespace quazare {
 		}
 		static string Ввод() { //на случай пустого или не численного ввода 
 			string ввод;
-			bool цикл, zero;
+			bool цикл;
 			do {
 				цикл = false; // не цикл
 				ввод = Console.ReadLine();
