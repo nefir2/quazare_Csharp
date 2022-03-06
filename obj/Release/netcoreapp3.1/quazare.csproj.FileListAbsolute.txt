@@ -1,0 +1,14 @@
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.exe
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.deps.json
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.runtimeconfig.json
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.runtimeconfig.dev.json
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.dll
+C:\Users\1\Documents\GitHub\quazare_Csharp\bin\Release\netcoreapp3.1\quazare.pdb
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.AssemblyInfoInputs.cache
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.AssemblyInfo.cs
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.csproj.CoreCompileInputs.cache
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.dll
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.pdb
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.genruntimeconfig.cache
+C:\Users\1\Documents\GitHub\quazare_Csharp\obj\Release\netcoreapp3.1\quazare.csproj.AssemblyReference.cache
