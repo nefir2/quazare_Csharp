@@ -8,7 +8,7 @@ namespace quazare {
 			Правила();
 			Br();
 			Console.WriteLine("если ввести \"правила\" в любой момент программы, то правила появятся снова.");
-			Console.Write("также, если ввести \"процент\" или \"percent\", то выведется таблица получаемых денег");
+			Console.Write("также, если ввести \"процент\" или \"percent\", то выведется таблица получаемых денег.");
 			Br();
 			do { //заново (на случай полного проигрыша)
 				//стоковые значения для переменных при начале игры заново
@@ -31,7 +31,10 @@ namespace quazare {
 									if(решение == -26) {
 										Console.WriteLine($"автомат: {avtomat}");
 									}
-									Console.WriteLine("введите 1, 2 или 3\n1: добавить 1-8;\n2: добавить 4-7;\n3: забрать.");
+									Console.WriteLine("введите 1, 2 или 3");
+									Console.WriteLine("1: добавить 1-8;");
+									Console.WriteLine("2: добавить 4-7;");
+									Console.WriteLine("3: забрать.");
 									решение = Convert.ToInt32(Ввод()); //ввод действия
 									if(решение == -26) {
 										Console.WriteLine($"ваша ставка: {stavka}");
@@ -55,7 +58,9 @@ namespace quazare {
 								if(решение == -26) {
 									Console.WriteLine($"автомат: {avtomat}");
 								}
-								Console.WriteLine("введите 1 или 2\n1: добавить 1-8;\n2: добавить 4-7.");
+								Console.WriteLine("введите 1 или 2");
+								Console.WriteLine("1: добавить 1-8;");
+								Console.WriteLine("2: добавить 4-7.");
 								решение = Convert.ToInt32(Ввод());
 								if(решение == -26) {
 									Console.WriteLine($"ваша ставка: {stavka}");
@@ -77,35 +82,43 @@ namespace quazare {
 					}
 					vse += stavka; //возврат денег на весь счёт
 					//вывод выигрыша
-					Console.WriteLine($"\nваш выигрыш: {Math.Floor(stavka)}"); //вывод выигрыша, без остатка (визуал)
+					Console.WriteLine();
+					Console.WriteLine($"ваш выигрыш: {Math.Floor(stavka)}"); //вывод выигрыша, без остатка (визуал)
 					Console.WriteLine($"ваши деньги: {Math.Floor(vse)}"); //вывод всех денег, без остатка (визуал)
 					if (vse > record) { //если побито рекордное количество денег, появляется сообщение
 						record = vse;
-						Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
+						Console.WriteLine();
+						Console.WriteLine($"рекордное количество ваших денег: {Math.Floor(record)}");
 					}
 					Br(); //перенос строк (визуал)
 					if (vse >= 20) { //решение о продолжении игры, если всех денег хватает
 						do {
-							Console.WriteLine("продолжить?\n1.да\n2.нет");
+							Console.WriteLine("продолжить?");
+							Console.WriteLine("1.да");
+							Console.WriteLine("2.нет");
 							продолжить = Convert.ToInt32(Ввод());
 							Br();
 						} while (продолжить == -26);
 					}
 					else { //если все деньги меньше 20
-						Console.WriteLine("у вас не осталось денег,\nвы проиграли.");
+						Console.WriteLine("у вас не осталось денег,");
+						Console.WriteLine("вы проиграли.");
 						продолжить = 2; //принудительное окончание игры, из-за проигрыша денег
 						Br();
 					}
 				} while (продолжить == 1);
 				if (vse < 20) { //решение о начале игры заново. обход случая когда игрок захотел выйти из игры сохранив деньги
 					do {
-						Console.WriteLine("заново?\n1.да\n2.нет\n");
+						Console.WriteLine("заново?");
+						Console.WriteLine("1.да");
+						Console.WriteLine("2.нет");
 						заново = Convert.ToInt32(Ввод());
 						Br();
 					} while (заново == -26);
 				}
 				if (заново != 1) { //вывод рекорда если игрок захотел выйти
-					Console.WriteLine($"\nрекордное количество ваших денег: {Math.Floor(record)}");
+					Console.WriteLine();
+					Console.WriteLine($"рекордное количество ваших денег: {Math.Floor(record)}");
 					Br();
 				}
 			} while (заново == 1);
@@ -117,7 +130,8 @@ namespace quazare {
 			do { //цикл для случая ввода команды
 				//вывод меню
 				Console.WriteLine($"у вас всего денег: {Math.Floor(все_деньги)}");
-				Console.WriteLine("введите номер действия со ставкой:\n");
+				Console.WriteLine("введите номер действия со ставкой:");
+				Console.WriteLine();
 				Console.WriteLine("1.поставить все деньги(если больше 200 то ставится 200);");
 				Console.WriteLine("2.поставить половину всех ваших денег(если больше 200 то поставится 100);");
 				Console.WriteLine("3.поставить минимум(20);");
@@ -154,7 +168,8 @@ namespace quazare {
 							if (ставка == -26) break;
 							if (ставка > 200 || ставка < 20) Console.WriteLine("введите от 20 до 200!!"); //если выход за границы возможного ввода
 							if (ставка > все_деньги && ставка <= 200 && ставка >= 20) { //если в границах, но больше всех денег, чем есть не счету
-								Console.WriteLine($"ставка не может быть больше чем количество ваших денег.\nу вас денег: {все_деньги}"); 
+								Console.WriteLine("ставка не может быть больше чем количество ваших денег.");
+								Console.WriteLine($"у вас денег: {все_деньги}"); 
 							}
 							Console.WriteLine("ставка (20-200): ");
 							ставка = Convert.ToDouble(Ввод());
@@ -166,7 +181,8 @@ namespace quazare {
 		}
 		static double Пересчёт(double все_деньги, double ставка) { //простая функция по пересчёту и выводу сообщения о количестве денег
 			все_деньги -= ставка;
-			Console.WriteLine($"\nваши деньги: {Math.Floor(все_деньги)}");
+			Console.WriteLine();
+			Console.WriteLine($"ваши деньги: {Math.Floor(все_деньги)}");
 			Br();
 			return все_деньги;
 		}
@@ -241,11 +257,19 @@ namespace quazare {
 		}
 		static void Правила() {
 			Br();
-			Console.WriteLine("для начала игры вам даётся 200 денег.\nсначала вы должны сделать ставку, после чего начнётся игра.\n"); 
-			Console.WriteLine("автомат выдаёт случайное число, и вы должны сделать выбор:\nдобавить к этому числу от 1 до 8 или от 4 до 7.\n");
-			Console.WriteLine("если в автомате выпадет 20 очков, то вы выиграли.\nно если выпадает меньше, вы всё равно сможете забрать деньги.");
-			Console.WriteLine("если забираете раньше 20 очков, вы получаете меньше денег.\n");
-			Console.WriteLine("если вам не повезло, и выпало больше 20,\nто вы автоматически проигрываете всю ставку.\n");
+			Console.WriteLine("для начала игры вам даётся 200 денег.");
+			Console.WriteLine("сначала вы должны сделать ставку, после чего начнётся игра.");
+			Console.WriteLine();
+			Console.WriteLine("автомат выдаёт случайное число, и вы должны сделать выбор:");
+			Console.WriteLine("добавить к этому числу от 1 до 8 или от 4 до 7.");
+			Console.WriteLine();
+			Console.WriteLine("если в автомате выпадет 20 очков, то вы выиграли.");
+			Console.WriteLine("но если выпадает меньше, вы всё равно сможете забрать деньги.");
+			Console.WriteLine("если забираете раньше 20 очков, вы получаете меньше денег.");
+			Console.WriteLine();
+			Console.WriteLine("если вам не повезло, и выпало больше 20,");
+			Console.WriteLine("то вы автоматически проигрываете всю ставку.");
+			Console.WriteLine();
 			Проценты();
 			Console.WriteLine("если меньше 15, то забрать нельзя, если больше 20 - вы получаете 0.");
 		}
@@ -285,7 +309,9 @@ namespace quazare {
 			return деньги;
 		}
 		static void Br() { //отступ на несколько строк
-			Console.Write("\n\n\n");
+			Console.WriteLine("");
+			Console.WriteLine("");
+			Console.WriteLine("");
 		}
 	}
 }
