@@ -172,7 +172,7 @@ namespace quazare {
 								Console.WriteLine("ставка не может быть больше чем количество ваших денег.");
 								Console.WriteLine($"у вас денег: {все_деньги}"); 
 							}
-							Console.WriteLine("ставка (20-200): ");
+							Console.Write("ставка (20-200): ");
 							ставка = Convert.ToDouble(Ввод());
 						}
 					} while (ставка == -26);
