@@ -227,7 +227,6 @@ namespace quazare {
 			Console.WriteLine("19    -    150%;");
 			Console.WriteLine("20    -    200%.");
 		}
-		//функция для определения выигрыша
 		static double Win(int значение_автомата, double деньги) { //функция пересчёта денег при окончании игры
 			switch (значение_автомата) {
 				case 15:
@@ -254,8 +253,7 @@ namespace quazare {
 			}
 			return деньги;
 		}
-		//отступ на несколько строк
-		static void Br() { 
+		static void Br() { //отступ на несколько строк
 			Console.Write("\n\n\n");
 		}
 	}
