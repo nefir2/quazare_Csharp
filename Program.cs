@@ -33,6 +33,10 @@ namespace quazare {
 									}
 									Console.WriteLine("введите 1, 2 или 3\n1: добавить 1-8;\n2: добавить 4-7;\n3: забрать.");
 									решение = Convert.ToInt32(Ввод()); //ввод действия
+									if(решение == -26) {
+										Console.WriteLine($"ваша ставка: {stavka}");
+										Br();
+									}
 									while (решение > 3 || решение < 1) { //система против дурака
 										if (решение == -26) break;
 										Console.WriteLine("введите 1, 2 или 3!!!");
@@ -53,6 +57,10 @@ namespace quazare {
 								}
 								Console.WriteLine("введите 1 или 2\n1: добавить 1-8;\n2: добавить 4-7.");
 								решение = Convert.ToInt32(Ввод());
+								if(решение == -26) {
+									Console.WriteLine($"ваша ставка: {stavka}");
+									Br();
+								}
 								while (решение > 2 || решение < 1) { //система против дурака
 									if (решение == -26) break;
 									Console.WriteLine("введите 1 или 2!!!");
