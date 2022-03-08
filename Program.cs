@@ -24,8 +24,8 @@ namespace quazare
                 record = 0;
                 do //цикл "продолжить" (на случай, если остались деньги)
                 {
-                    vse = Ставка(); //функция действий со ставкой
-                    vse = Пересчёт(vse, stavka); //пересчёт всех денег на основе ставки
+                    Ставка(); //функция действий со ставкой
+                    Пересчёт(); //пересчёт всех денег на основе ставки
                     Console.WriteLine($"автомат: {avtomat = Автомат(0, 0)}"); //первый выброс автомата
                     while (avtomat <= 20) //если выйдет за 20 то автоматический проигрыш ставки
                     {
@@ -159,11 +159,10 @@ namespace quazare
                 }
             } while (заново == 1);
         } //конец игры
-        static double Ставка() //вывод выбора ставки
+        static void Ставка() //вывод выбора ставки
         {
             //переменные
             int действие; //выбор пользователя
-            double ставка = 0; //объявление ставки
             do //цикл для случая ввода команды
             {
                 //вывод меню
@@ -187,50 +186,48 @@ namespace quazare
             switch (действие) //распределение по выбору
             {
                 case 1: //все деньги
-                    if (vse > 200) ставка = 200;
-                    else ставка = vse;
+                    if (vse > 200) stavka = 200;
+                    else stavka = vse;
                     break;
                 case 2: //половина всех денег
-                    if (vse > 200) ставка = 100;
+                    if (vse > 200) stavka = 100;
                     else if (vse < 40)
                     {
-                        Console.WriteLine("меньше 20 ставить нельзя. ставка = 20");
-                        ставка = 20;
+                        Console.WriteLine("меньше 20 ставить нельзя. stavka = 20");
+                        stavka = 20;
                     }
-                    else ставка = vse / 2;
+                    else stavka = vse / 2;
                     break;
                 case 3: //минимальное количество денег
-                    ставка = 20;
+                    stavka = 20;
                     break;
                 case 4: //ввод своей ставки
                     do //цикл для команд
                     {
-                        Console.Write("ставка (20-200): ");
-                        ставка = Convert.ToDouble(Ввод());
-                        while (ставка < 20 || ставка > 200 || ставка > vse) //система против дурака
+                        Console.Write("stavka (20-200): ");
+                        stavka = Convert.ToDouble(Ввод());
+                        while (stavka < 20 || stavka > 200 || stavka > vse) //система против дурака
                         {
-                            if (ставка == -26) break; //выход из цикла если введена команда
-                            if (ставка > 200 || ставка < 20) Console.WriteLine("введите от 20 до 200!!"); //если выход за границы возможного ввода
-                            if (ставка > vse && ставка <= 200 && ставка >= 20) //если в границах, но больше всех денег, чем есть не счету
+                            if (stavka == -26) break; //выход из цикла если введена команда
+                            if (stavka > 200 || stavka < 20) Console.WriteLine("введите от 20 до 200!!"); //если выход за границы возможного ввода
+                            if (stavka > vse && stavka <= 200 && stavka >= 20) //если в границах, но больше всех денег, чем есть не счету
                             {
-                                Console.WriteLine("ставка не может быть больше чем количество ваших денег.");
+                                Console.WriteLine("stavka не может быть больше чем количество ваших денег.");
                                 Console.WriteLine($"у вас денег: {vse}");
                             }
-                            Console.Write("ставка (20-200): ");
-                            ставка = Convert.ToDouble(Ввод());
+                            Console.Write("stavka (20-200): ");
+                            stavka = Convert.ToDouble(Ввод());
                         }
-                    } while (ставка == -26);
+                    } while (stavka == -26);
                     break; //синтаксис свитча
             }
-            return ставка;
         }
-        static double Пересчёт(double все_деньги, double ставка) //простая функция по пересчёту и выводу сообщения о количестве денег
+        static void Пересчёт() //простая функция по пересчёту и выводу сообщения о количестве денег
         {
-            все_деньги -= ставка;
+            vse -= stavka;
             Console.WriteLine();
-            Console.WriteLine($"ваши деньги: {Math.Floor(все_деньги)}");
+            Console.WriteLine($"ваши деньги: {Math.Floor(vse)}");
             Br();
-            return все_деньги;
         }
         static int Автомат(int значение_автомата, int номер_действия) //случайное число из автомата
         { //верхнее значение (top) никогда не выпадет
@@ -279,10 +276,7 @@ namespace quazare
             {
                 for (int i = 0; i < изКого.Length - что.Length; i++)
                 {
-                    for (int j = 0; j < что.Length; j++)
-                    {
-                        if (изКого[j + i] == что[j]) счётчикСовпадений++;
-                    }
+                    for (int j = 0; j < что.Length; j++) if (изКого[j + i] == что[j]) счётчикСовпадений++;
                     if (счётчикСовпадений == что.Length) ans = true; //? true : false были опущены редактором
                     if (ans == true) break;
                     счётчикСовпадений = 0;
@@ -299,77 +293,75 @@ namespace quazare
             return ans;
         }
         //*/
+        static double Чит_команда(string команда, int номерЧита)
+        {
+            double параметр = -1;
+            if (Сравнивалка(команда, $"/-26 {номерЧита} ") && команда.Length > 6)
+            {
+                char[] howMuch = new char[команда.Length - 7];
+                for (int i = 7; i < команда.Length; i++)
+                {
+                    if (Char.IsNumber(команда, i) == true)
+                    {
+                        howMuch[i - 7] = команда[i];
+                    }
+                    else
+                    {
+                        Console.WriteLine("ты как буквы превратишь в цифры");
+                        return -1;
+                    }
+                }
+                string chars = new string(howMuch);
+                параметр = double.Parse(chars);
+            }
+            return параметр;
+        }
         static void Комманды(string команда) //функция при вводе команд
         {
-            if (команда == "/percent" || команда == "/procent" || команда == "/процент" || команда == "/p") //вызов функции проценты
+            double p;
+            do
             {
-                Br();
-                Проценты();
-                Br();
-            }
-            else if (команда == "/правила" || команда == "/rules" || команда == "/r") //вызов функции правила
-            {
-                Правила();
-                Br();
-            }
-            else if (команда == "/help" || команда == "/команды" || команда == "/помощь" || команда == "/h") //вывод команд
-            {
-                Br();
-                Console.WriteLine("команды:");
-                Console.WriteLine("/help, /помощь или /команды - вывод списка команд;");
-                Console.WriteLine("/процент или /percent - вывод таблицы возвращаемых денег от значения автомата;");
-                Console.WriteLine("/правила или /rules - вывод правил.");
-                Console.WriteLine("есть сокращения команд: первая буква команды на английском");
-                Br();
-            }
-            else if (команда == "/back" || команда == "/верни" || команда == "/b") Br(); //вывод сообщения о действии, если старое потерялось в истории
-            else if (Сравнивалка(команда, "/-26"))
-            {
-                int номер_действия;
-                double сколько = -1;
-                bool буквы = false;
-                //Console.WriteLine("ок");
-                do
+                if (команда == "/percent" || команда == "/procent" || команда == "/процент" || команда == "/p") //вызов функции проценты
                 {
-                    if (команда.Length > 4)
+                    Br();
+                    Проценты();
+                    Br();
+                }
+                else if (команда == "/правила" || команда == "/rules" || команда == "/r") //вызов функции правила
+                {
+                    Правила();
+                    Br();
+                }
+                else if (команда == "/help" || команда == "/команды" || команда == "/помощь" || команда == "/h") //вывод команд
+                {
+                    Br();
+                    Console.WriteLine("команды:");
+                    Console.WriteLine("/help, /помощь или /команды - вывод списка команд;");
+                    Console.WriteLine("/процент или /percent - вывод таблицы возвращаемых денег от значения автомата;");
+                    Console.WriteLine("/правила или /rules - вывод правил.");
+                    Console.WriteLine("есть сокращения команд: первая буква команды на английском");
+                    Br();
+                }
+                else if (команда == "/back" || команда == "/верни" || команда == "/b") Br(); //вывод сообщения о действии, если старое потерялось в истории
+                else if (Сравнивалка(команда, "/-26"))
+                {
+                    Br();
+                    Console.WriteLine($"avtomat = {avtomat}");
+                    Console.WriteLine($"vse = {vse}");
+                    Console.WriteLine($"stavka = {stavka}");
+                    Console.WriteLine($"record = {record}");
+                    int номер_действия;
+                    double сколько = -1;
+                    if (команда.Length > 5 && Char.IsNumber(команда[5]) == true)
                     {
-                        if (Char.IsNumber(команда[5]) == true) 
-                        { 
-                            номер_действия = int.Parse(команда[5].ToString());
-                        }
-                        else break;
-                        if (Сравнивалка(команда, "/-26 1 ") && команда.Length > 6)
-                        {
-                            буквы = false;
-                            char[] howMuch = new char[команда.Length - 7];
-                            for (int i = 7; i < команда.Length; i++)
-                            {
-                                if (Char.IsNumber(команда, i) == true)
-                                {
-                                    howMuch[i - 7] = команда[i];
-                                }
-                                else
-                                {
-                                    Console.WriteLine("ты как буквы превратишь в цифры");
-                                    буквы = true;
-                                    break;
-                                }
-                            }
-                            if (буквы == true) break;
-                            string chars = new string(howMuch);
-                            Console.WriteLine(chars);
-                            сколько = double.Parse(chars);
-                        }
-                        else if (команда == "/-26 1")
-                        {
-                            Console.WriteLine("сколько надо?");
-                            сколько = Convert.ToInt32(Ввод());
-                        }
+                        номер_действия = int.Parse(команда[5].ToString());
+                        сколько = Чит_команда(команда, номер_действия);
                     }
                     else
                     {
                         Console.WriteLine("чо исполнять?");
                         номер_действия = Convert.ToInt32(Ввод());
+                        if (номер_действия == -2) break;
                     }
                     switch (номер_действия)
                     {
@@ -377,25 +369,46 @@ namespace quazare
                             exit = 1;
                             break;
                         case 1:
-                            Console.WriteLine("фуу читор");
                             if (сколько != -1) vse = сколько;
                             else
                             {
-                                Console.WriteLine("сколько надо?");
-                                vse = Convert.ToDouble(Ввод());
+                                Console.Write("vse = ");
+                                p = Convert.ToDouble(Ввод());
+                                if (p == -2) break;
+                                else vse = p;
+                            }
+                            break;
+                        case 2:
+                            if (сколько != -1) avtomat = (int)сколько;
+                            else
+                            {
+                                Console.Write("автомат: ");
+                                p = Convert.ToInt32(Ввод());
+                                if (p == -2) break;
+                                else avtomat = (int)p;
+                            }
+                            break;
+                        case 3:
+                            if (сколько != -1) stavka = сколько;
+                            else
+                            {
+                                Console.Write("stavka = ");
+                                p = Convert.ToDouble(Ввод());
+                                if (p == -2) break;
+                                else stavka = p;
                             }
                             break;
                         default:
                             Console.WriteLine("такой команды нет.");
                             break;
                     }
-                } while (буквы);
-            }
-            else //если не совпало ни с одной командой
-            {
-                Console.WriteLine("команды нормально пиши");
-                Br();
-            }
+                }
+                else //если не совпало ни с одной командой
+                {
+                    Console.WriteLine("команды нормально пиши");
+                    Br();
+                }
+            } while (false);
         }
         static bool StringHaveNotNumbers(string numbers) //функция для проверки строки на цифры
         {
@@ -420,8 +433,15 @@ namespace quazare
                 ввод = Console.ReadLine();
                 if (ввод == "")
                 {
-                    Console.WriteLine("поаккуратнее с пустым вводом");
-                    цикл = true;
+                    if (inCommand == true)
+                    {
+                        ввод = "-2";
+                    }
+                    else
+                    {
+                        Console.WriteLine("поаккуратнее с пустым вводом");
+                        цикл = true;
+                    }
                 }
                 else //не пустой ввод
                 {
