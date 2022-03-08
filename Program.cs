@@ -24,8 +24,8 @@ namespace quazare
                 record = 0;
                 do //цикл "продолжить" (на случай, если остались деньги)
                 {
-                    Ставка(); //функция действий со ставкой
-                    Пересчёт(); //пересчёт всех денег на основе ставки
+                    vse = Ставка(); //функция действий со ставкой
+                    vse = Пересчёт(vse, stavka); //пересчёт всех денег на основе ставки
                     Console.WriteLine($"автомат: {avtomat = Автомат(0, 0)}"); //первый выброс автомата
                     while (avtomat <= 20) //если выйдет за 20 то автоматический проигрыш ставки
                     {
@@ -107,7 +107,7 @@ namespace quazare
                         Br();
                     }
                     vse += stavka; //возврат денег на весь счёт
-                                   //вывод выигрыша
+                    //вывод выигрыша
                     Console.WriteLine();
                     Console.WriteLine($"ваш выигрыш: {Math.Floor(stavka)}"); //вывод выигрыша, без остатка
                     Console.WriteLine($"ваши деньги: {Math.Floor(vse)}"); //вывод всех денег, без остатка
@@ -159,7 +159,7 @@ namespace quazare
                 }
             } while (заново == 1);
         } //конец игры
-        static void Ставка() //вывод выбора ставки
+        static double Ставка() //вывод выбора ставки
         {
             //переменные
             int действие; //выбор пользователя
@@ -222,13 +222,15 @@ namespace quazare
                     } while (ставка == -26);
                     break; //синтаксис свитча
             }
+            return ставка;
         }
-        static void Пересчёт() //простая функция по пересчёту и выводу сообщения о количестве денег
+        static double Пересчёт(double все_деньги, double ставка) //простая функция по пересчёту и выводу сообщения о количестве денег
         {
-            vse -= stavka;
+            все_деньги -= ставка;
             Console.WriteLine();
-            Console.WriteLine($"ваши деньги: {Math.Floor(vse)}");
+            Console.WriteLine($"ваши деньги: {Math.Floor(все_деньги)}");
             Br();
+            return все_деньги;
         }
         static int Автомат(int значение_автомата, int номер_действия) //случайное число из автомата
         { //верхнее значение (top) никогда не выпадет
@@ -331,17 +333,20 @@ namespace quazare
                 {
                     if (команда.Length > 4)
                     {
-                        if (Char.IsNumber(команда[5]) == true) номер_действия = команда[5];
+                        if (Char.IsNumber(команда[5]) == true) 
+                        { 
+                            номер_действия = int.Parse(команда[5].ToString());
+                        }
                         else break;
                         if (Сравнивалка(команда, "/-26 1 ") && команда.Length > 6)
                         {
                             буквы = false;
-                            string[] howMuch = new string[команда.Length - 7];
+                            char[] howMuch = new char[команда.Length - 7];
                             for (int i = 7; i < команда.Length; i++)
                             {
                                 if (Char.IsNumber(команда, i) == true)
                                 {
-                                    howMuch[i - 7] += команда[i];
+                                    howMuch[i - 7] = команда[i];
                                 }
                                 else
                                 {
@@ -351,7 +356,9 @@ namespace quazare
                                 }
                             }
                             if (буквы == true) break;
-                            сколько = Convert.ToDouble(howMuch);
+                            string chars = new string(howMuch);
+                            Console.WriteLine(chars);
+                            сколько = double.Parse(chars);
                         }
                         else if (команда == "/-26 1")
                         {
@@ -359,10 +366,10 @@ namespace quazare
                             сколько = Convert.ToInt32(Ввод());
                         }
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine("чо исполнять?");
-                        номер_действия = Convert.ToInt32(Ввод()); 
+                        номер_действия = Convert.ToInt32(Ввод());
                     }
                     switch (номер_действия)
                     {
@@ -372,10 +379,10 @@ namespace quazare
                         case 1:
                             Console.WriteLine("фуу читор");
                             if (сколько != -1) vse = сколько;
-                            else 
+                            else
                             {
                                 Console.WriteLine("сколько надо?");
-                                vse = Convert.ToDouble(Ввод()); 
+                                vse = Convert.ToDouble(Ввод());
                             }
                             break;
                         default:
@@ -393,7 +400,7 @@ namespace quazare
         static bool StringHaveNotNumbers(string numbers) //функция для проверки строки на цифры
         {
             bool yes = false;
-            for (int i = 0; i < numbers.Length; i++) 
+            for (int i = 0; i < numbers.Length; i++)
             {
                 if (Char.IsNumber(numbers, i) == false) //если очередной символ оказывается не цифрой
                 {
