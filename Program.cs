@@ -193,7 +193,7 @@ namespace quazare
                     if (vse > 200) stavka = 100;
                     else if (vse < 40)
                     {
-                        Console.WriteLine("меньше 20 ставить нельзя. stavka = 20");
+                        Console.WriteLine("меньше 20 ставить нельзя. ставка = 20");
                         stavka = 20;
                     }
                     else stavka = vse / 2;
@@ -212,7 +212,7 @@ namespace quazare
                             if (stavka > 200 || stavka < 20) Console.WriteLine("введите от 20 до 200!!"); //если выход за границы возможного ввода
                             if (stavka > vse && stavka <= 200 && stavka >= 20) //если в границах, но больше всех денег, чем есть не счету
                             {
-                                Console.WriteLine("stavka не может быть больше чем количество ваших денег.");
+                                Console.WriteLine("ставка не может быть больше чем количество ваших денег.");
                                 Console.WriteLine($"у вас денег: {vse}");
                             }
                             Console.Write("stavka (20-200): ");
