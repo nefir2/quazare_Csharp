@@ -46,7 +46,6 @@ namespace quazare
                                         if (exit == 1) break;
                                         Console.WriteLine($"ваша ставка: {stavka}"); //вывод ставки для более точного определения выбора
                                         Console.WriteLine($"если вы заберёте сейчас, то вы получите {Win(avtomat, stavka)}"); //вывод возможного получаемого выигрыша для максимально точного выбора
-                                        Br();
                                         Console.WriteLine($"автомат: {avtomat}"); //вывод автомата если была введена команда
                                     }
                                     Console.WriteLine("введите 1, 2 или 3:");
@@ -54,12 +53,15 @@ namespace quazare
                                     Console.WriteLine("2: добавить 4-7;");
                                     Console.WriteLine("3: забрать.");
                                     решение = Convert.ToInt32(Ввод()); //ввод действия
+                                    
                                     while (решение > 3 || решение < 1) //система против дурака
                                     {
                                         if (exit == 1) break;
                                         if (решение == -26) break; //выход из цикла если это была команда
+                                        
                                         Console.WriteLine("введите 1, 2 или 3!!!");
                                         решение = Convert.ToInt32(Ввод());
+                                        
                                     }
                                 } while (решение == -26);
                                 if (решение == 1 || решение == 2) avtomat = Решение(avtomat, решение); //выброс автомата с учётом выбора игрока
@@ -83,17 +85,18 @@ namespace quazare
                                 Console.WriteLine("1: добавить 1-8;");
                                 Console.WriteLine("2: добавить 4-7.");
                                 решение = Convert.ToInt32(Ввод());
+                                
                                 if (решение == -26)
                                 {
                                     if (exit == 1) break;
                                     Console.WriteLine($"ваша ставка: {stavka}");
-                                    Br();
                                 }
                                 while (решение > 2 || решение < 1) //система против дурака
                                 {
                                     if (решение == -26) break;
                                     Console.WriteLine("введите 1 или 2!!!");
                                     решение = Convert.ToInt32(Ввод());
+                                    
                                 }
                             } while (решение == -26);
                             avtomat = Решение(avtomat, решение); //выброс автомата с учётом выбора игрока
@@ -104,20 +107,16 @@ namespace quazare
                     {
                         Console.WriteLine("вы проиграли");
                         stavka = Win(avtomat, stavka); //пересчёт денег при проигрыше
-                        Br();
                     }
                     vse += stavka; //возврат денег на весь счёт
                     //вывод выигрыша
-                    Console.WriteLine();
                     Console.WriteLine($"ваш выигрыш: {Math.Floor(stavka)}"); //вывод выигрыша, без остатка
                     Console.WriteLine($"ваши деньги: {Math.Floor(vse)}"); //вывод всех денег, без остатка
                     if (vse > record) //если побито рекордное количество денег, появляется сообщение
                     {
                         record = vse;
-                        Console.WriteLine();
                         Console.WriteLine($"рекордное количество ваших денег: {Math.Floor(record)}");
                     }
-                    Br(); //перенос строк
                     if (vse >= 20) //решение о продолжении игры, если всех денег хватает
                     {
                         do //цикл на случай если введена команда
@@ -126,16 +125,15 @@ namespace quazare
                             Console.WriteLine("1.да");
                             Console.WriteLine("2.нет");
                             продолжить = Convert.ToInt32(Ввод());
+                            
                             if (exit == 1) break;
-                            Br();
                         } while (продолжить == -26);
                     }
                     else //если все деньги меньше 20
                     {
-                        Console.WriteLine("у вас не осталось денег,");
+                        Console.WriteLine("\nу вас не осталось денег,");
                         Console.WriteLine("вы проиграли.");
                         продолжить = 2; //принудительное окончание игры, из-за проигрыша денег
-                        Br();
                     }
                 } while (продолжить == 1);
                 if (exit == 1) break;
@@ -143,19 +141,17 @@ namespace quazare
                 {
                     do //цикл для команд
                     {
-                        Console.WriteLine("заново?");
+                        Console.WriteLine("\nзаново?");
                         Console.WriteLine("1.да");
                         Console.WriteLine("2.нет");
                         заново = Convert.ToInt32(Ввод());
+                        
                         if (exit == 1) break;
-                        Br();
                     } while (заново == -26);
                 }
                 if (заново != 1) //вывод рекорда если игрок захотел выйти
                 {
-                    Console.WriteLine();
                     Console.WriteLine($"рекордное количество ваших денег: {Math.Floor(record)}");
-                    Br();
                 }
             } while (заново == 1);
         } //конец игры
@@ -175,12 +171,14 @@ namespace quazare
                 Console.WriteLine("4.ввести свою ставку.");
                 //получение выбора действия
                 действие = Convert.ToInt32(Ввод());
+                
                 if (exit == 1) break;
                 while (действие > 4 || действие < 1) //система против дурака
                 {
                     if (действие == -26) break; //выход из цикла если введена команда
                     Console.WriteLine("можно ввести от 1 до 4!!");
                     действие = Convert.ToInt32(Ввод());
+                    
                 }
             } while (действие == -26);
             switch (действие) //распределение по выбору
@@ -206,6 +204,7 @@ namespace quazare
                     {
                         Console.Write("stavka (20-200): ");
                         stavka = Convert.ToDouble(Ввод());
+                        
                         while (stavka < 20 || stavka > 200 || stavka > vse) //система против дурака
                         {
                             if (stavka == -26) break; //выход из цикла если введена команда
@@ -217,6 +216,7 @@ namespace quazare
                             }
                             Console.Write("stavka (20-200): ");
                             stavka = Convert.ToDouble(Ввод());
+                            
                         }
                     } while (stavka == -26);
                     break; //синтаксис свитча
@@ -225,9 +225,7 @@ namespace quazare
         static void Пересчёт() //простая функция по пересчёту и выводу сообщения о количестве денег
         {
             vse -= stavka;
-            Console.WriteLine();
             Console.WriteLine($"ваши деньги: {Math.Floor(vse)}");
-            Br();
         }
         static int Автомат(int значение_автомата, int номер_действия) //случайное число из автомата
         { //верхнее значение (top) никогда не выпадет
@@ -431,6 +429,7 @@ namespace quazare
             {
                 цикл = false; //если цикл останется false, то функция вернёт значение без повторов
                 ввод = Console.ReadLine();
+                Console.Clear();
                 if (ввод == "")
                 {
                     if (inCommand == true)
@@ -445,7 +444,7 @@ namespace quazare
                 }
                 else //не пустой ввод
                 {
-                    if (ввод[0] == '/' && inCommand == false) //ожидание получения команды
+                    if (ввод[0] == '/') //ожидание получения команды  && inCommand == false
                     { //команды
                         inCommand = true;
                         Комманды(ввод);
@@ -455,6 +454,7 @@ namespace quazare
                     else if (ввод[0] == '/' && inCommand == true)
                     {
                         Console.WriteLine("ну да, из команды вызвать команду, гениально!");
+                        цикл = true;
                     }
                     else //не команда
                     {
@@ -510,9 +510,7 @@ namespace quazare
         }
         static void Br() //отступ на несколько строк
         {
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("");
+            Console.WriteLine("\n\n\n");
         }
     }
 }
