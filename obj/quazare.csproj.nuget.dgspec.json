@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "\\\\26k-10-dc10\\studocredir\\АхтамовВ\\Мои документы\\GitHub\\quazare_Csharp\\quazare.csproj": {}
+    "C:\\Users\\1\\Documents\\GitHub\\quazare_Csharp\\quazare.csproj": {}
   },
   "projects": {
-    "\\\\26k-10-dc10\\studocredir\\АхтамовВ\\Мои документы\\GitHub\\quazare_Csharp\\quazare.csproj": {
+    "C:\\Users\\1\\Documents\\GitHub\\quazare_Csharp\\quazare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\26k-10-dc10\\studocredir\\АхтамовВ\\Мои документы\\GitHub\\quazare_Csharp\\quazare.csproj",
+        "projectUniqueName": "C:\\Users\\1\\Documents\\GitHub\\quazare_Csharp\\quazare.csproj",
         "projectName": "quazare",
-        "projectPath": "\\\\26k-10-dc10\\studocredir\\АхтамовВ\\Мои документы\\GitHub\\quazare_Csharp\\quazare.csproj",
-        "packagesPath": "C:\\Users\\АхтамовВ\\.nuget\\packages\\",
-        "outputPath": "\\\\26k-10-dc10\\studocredir\\АхтамовВ\\Мои документы\\GitHub\\quazare_Csharp\\obj\\",
+        "projectPath": "C:\\Users\\1\\Documents\\GitHub\\quazare_Csharp\\quazare.csproj",
+        "packagesPath": "C:\\Users\\1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\1\\Documents\\GitHub\\quazare_Csharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\АхтамовВ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -60,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
         }
       }
     }

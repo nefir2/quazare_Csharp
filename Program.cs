@@ -10,6 +10,7 @@ namespace quazare
         static bool inCommand = false;
         static void Main()
         {
+            Console.Clear();
             Правила();
             Br(); //перенос строк 
             Console.WriteLine("если ввести \"/правила\" в любой момент программы, то правила появятся снова.");
@@ -467,7 +468,6 @@ namespace quazare
         }
         static void Правила() //функция для вывода правил (используется при запуске программы и вводе команды)
         {
-            Br();
             Console.WriteLine("для начала игры вам даётся 200 денег.");
             Console.WriteLine("сначала вы должны сделать ставку, после чего начнётся игра.");
             Console.WriteLine();
